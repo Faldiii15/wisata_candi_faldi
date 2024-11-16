@@ -44,18 +44,17 @@ final Candi candi;
         ),
       //   TODO: 5. Buat Text sebagai anak dari Column
         Padding(
-          padding: const EdgeInsets.only(left:16,bottom:8)),
+          padding: EdgeInsets.only(left:16,bottom:8),
           child: Text(
-                candi.type
+                candi.type,
                 style: TextStyle(
-                fontSize: 12
+                fontSize: 12,
                 ),
                 ),
+        ),
     ],
-        )
-        )
-      ],
-    ),
-    );
+        ),
+        );
+
   }
 }

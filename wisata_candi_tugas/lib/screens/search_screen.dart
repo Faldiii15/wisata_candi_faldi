@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wisata_candi_nicholastan/data/candi_data.dart';
-import 'package:wisata_candi_nicholastan/models/candi.dart';
+import 'package:wisata_candi_faldi/data/candi_data.dart';
+import 'package:wisata_candi_faldi/models/candi.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
