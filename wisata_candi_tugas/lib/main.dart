@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wisata_candi_faldi/screens/favorite_screen.dart';
 import 'package:wisata_candi_faldi/screens/home_screen.dart';
 import 'package:wisata_candi_faldi/screens/profile_screen.dart';
 import 'package:wisata_candi_faldi/screens/search_screen.dart';
@@ -42,8 +43,22 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
     //   TODO: 2. Buat Properti body berupa widget yang di tampilkan
+      body: _children[_currentIndex],
     //   TODO: 3. Buat Properti bottomNavigationBar dengan nilai Theme
+      bottomNavigationBar: Theme(
     //   TODO: 4. Buat data dan child dari Theme
+        data: Theme.of(context).copyWith(
+      canvasColor: Colors.deepPurple[50],
+    ),
+      child: BottomNavigationBar(
+      currentIndex: _currentIndex,
+      onTap: (index){},
+      items: const[],
+    selectedItemColor: Colors.deepPurple,
+    unselectedItemColor: Colors.deepPurple[100],
+    showUnselectedLabels: true,
+    ),
+    ),
     );
   }
 }
