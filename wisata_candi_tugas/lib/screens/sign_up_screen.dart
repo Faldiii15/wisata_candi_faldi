@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
@@ -17,10 +17,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   String _errorText = '';
 
-  bool _isSignedIn = false;
-
   bool _obscurePassword = true;
 
+  //TODO: 1.Membuat method _signUp
+  void _signUp() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String name = _fullnameController.text.trim();
+    String username = _usernameController.text.trim();
+    String password = _passwordController.text.trim();
+    if(password.length < 8 ||
+        !password.contains(RegExp(r'[A-Z]'))||
+        !password.contains(RegExp(r'[a-z]'))||
+        !password.contains(RegExp(r'[0-9]'))||
+        !password.contains(RegExp(r'[!@#\\\$%^&*(),.?":{}|<>]'))){
+      setState(() {
+        _errorText = 'Minimal 8 karakter, kombinasi [A-Z], [a-z], [0-9], [!@#\\\$%^&*(),.?":{}|<>]';
+      });
+      return;
+    }
+    // Simpan data pengguna di SharedPreferences
+    prefs.setString('fullname', name);
+    prefs.setString('username', username);
+    prefs.setString('password', password);
+
+    // print('*** Sign Up berhasil!');
+    // print('Nama: $name');
+    // print('Nama Pengguna: $username');
+    // print('Password: $password');
+  }
+
+  //TODO: 2.Membuat method dispose
+  @override
+  void dispose(){
+    //TODO: Implement dispose
+    _fullnameController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +110,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     // TODO: 8. Pasang ElevatedButton Sign In
                     SizedBox(height: 20),
-                    ElevatedButton(onPressed: () {}, child: Text('Sign Up')),
+                    ElevatedButton(onPressed: () {
+                      _signUp();
+                    }, child: Text('Sign Up')),
                   ],
                 )),
           ),
